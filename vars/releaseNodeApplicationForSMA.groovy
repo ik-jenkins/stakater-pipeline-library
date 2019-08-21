@@ -13,7 +13,7 @@ def call(body) {
         stakaterNode(config) {
 
             def builder = new io.stakater.builder.Build()
-            def docker = new io.stakater.containers.Docker()
+            def podman = new io.stakater.containers.Podman()
             def stakaterCommands = new io.stakater.StakaterCommands()
             def git = new io.stakater.vc.Git()
             def slack = new io.stakater.notifications.Slack()
@@ -84,8 +84,8 @@ def call(body) {
                                 export DOCKER_IMAGE=${dockerImage}
                                 export DOCKER_TAG=${version}
                             """
-                            docker.buildImageWithTagCustom(dockerImage, version)
-                            docker.pushTagCustom(dockerImage, version)
+                            podman.buildImageWithTagCustom(dockerImage, version)
+                            podman.pushTagCustom(dockerImage, version)
                         }
                         
                         // If master
