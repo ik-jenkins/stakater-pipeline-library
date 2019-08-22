@@ -125,6 +125,7 @@ def getStakaterPodVolumes(Map parameters = [:]) {
     }
 
     if (isContainerDMount) {
+        volumes.add(hostPathVolume(hostPath: '/var/run/containerd/containerd.sock', mountPath: '/var/run/containerd/containerd.sock'))
         volumes.add(hostPathVolume(hostPath: '/var/lib/containers/', mountPath: '/var/lib/containers/'))
     }
 
