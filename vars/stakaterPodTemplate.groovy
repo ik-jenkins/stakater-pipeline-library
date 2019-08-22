@@ -99,6 +99,7 @@ def getStakaterPodVolumes(Map parameters = [:]) {
     Boolean isHubApiToken = parameters.get('isHubApiToken', false)
     Boolean isStkConfig = parameters.get('isStkConfig', false)
     Boolean isHelmPgpKey = parameters.get('isHelmPgpKey', false)
+    Boolean isContainerDMount = parameters.get('isContainerDMount', false)
     def additionalSecretVolumes = parameters.get('additionalSecretVolumes', [])
     def additionalHostPathVolumes = parameters.get('additionalHostPathVolumes', [])
     def additionalPVCs = parameters.get('additionalPVCs', [])
@@ -121,6 +122,10 @@ def getStakaterPodVolumes(Map parameters = [:]) {
 
     if (isDockerMount) {
         volumes.add(hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock'))
+    }
+
+    if (isContainerDMount) {
+        volumes.add(hostPathVolume(hostPath: '/var/lib/containers/', mountPath: '/var/lib/containers/'))
     }
 
     if (isGitSsh) {
