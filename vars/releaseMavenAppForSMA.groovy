@@ -9,7 +9,7 @@ def call(body) {
 
     def stakaterPod = new io.stakater.pods.Pod()
     stakaterPod.setToolsImage(config, "stakater/builder-maven:3.5.4-jdk1.8-apline8-v0.0.3")
-    stakaterPod.setDockerConfig(config)
+    stakaterPod.setContainerDConfig(config)
     stakaterPod.enableMavenSettings(config)
 
     timestamps {
@@ -139,7 +139,7 @@ def call(body) {
                         String commentMessage = "Yikes! You better fix it before anyone else finds out! [Build ${env.BUILD_NUMBER}](${env.BUILD_URL}) has Failed!"
 
                         if(cloneUsingToken) {
-                            git.addCommentToPullRequest(commentMessage, tokenSecret)
+                            git.addCommentToPullRequest(commentMessage, tokenSecret, gitUser)
                         } else {
                             git.addCommentToPullRequest(commentMessage)
                         }
@@ -153,7 +153,7 @@ def call(body) {
                         String commentMessage = "Image is available for testing. `docker pull ${dockerImage}:${version}`"
 
                         if(cloneUsingToken){
-                            git.addCommentToPullRequest(commentMessage, tokenSecret)
+                            git.addCommentToPullRequest(commentMessage, tokenSecret, gitUser)
                         } else {
                             git.addCommentToPullRequest(commentMessage)
                         }
