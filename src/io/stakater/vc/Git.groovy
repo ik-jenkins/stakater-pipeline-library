@@ -133,6 +133,7 @@ def addCommentToPullRequest(String message, String token, String user) {
             }
             break
         case "bitbucket":
+            echo "Posting on Bitbucket"
             def result = flow.postPRComment(message, env.CHANGE_ID, "${env.REPO_OWNER}/${env.REPO_NAME}", provider, providerToken, user)
             break
             
