@@ -127,11 +127,11 @@ def getStakaterPodVolumes(Map parameters = [:]) {
 
     if (isContainerDConfig) {
         volumes.add(hostPathVolume(hostPath: '/var/lib/containers/', mountPath: '/var/lib/containers/'))
+        volumes.add(secretVolume(secretName: 'jenkins-docker-cfg', mountPath: '/home/jenkins/.docker'))
     }
 
     if (isContainerDMount) {
         volumes.add(hostPathVolume(hostPath: '/var/run/containerd/containerd.sock', mountPath: '/var/run/containerd/containerd.sock'))
-       
     }
 
     if (isGitSsh) {
