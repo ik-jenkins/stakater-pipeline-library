@@ -11,6 +11,11 @@ def mountDockerSocket(Map parameters = [:]) {
     parameters.podVolumes.isDockerMount = true
 }
 
+def mountContainerDSocket(Map parameters = [:]) {
+    setPodVolumes(parameters)
+    parameters.podVolumes.isContainerDMount = true
+}
+
 Map setDockerConfig(Map parameters = [:]) {
     mountDockerSocket(parameters)
     setDefaultContainerEnvVarsConfig(parameters)
@@ -19,6 +24,16 @@ Map setDockerConfig(Map parameters = [:]) {
     parameters.podContainers.defaultContainer.envVarsConfig.isDocker = true
     return parameters
 }
+
+Map setContainerDConfig(Map parameters = [:]) {
+    mountContainerDSocket(parameters)
+    setDefaultContainerEnvVarsConfig(parameters)
+
+    parameters.podVolumes.isContainerDConfig = true
+    parameters.podContainers.defaultContainer.envVarsConfig.isContainerD = true
+    return parameters
+}
+
 
 def enableMavenSettings(Map parameters = [:]) {
     setPodVolumes(parameters)

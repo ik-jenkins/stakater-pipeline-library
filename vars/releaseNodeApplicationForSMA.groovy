@@ -7,7 +7,7 @@ def call(body) {
     body()
 
     def stakaterPod = new io.stakater.pods.Pod()
-    stakaterPod.setDockerConfig(config)
+    stakaterPod.setContainerDConfig(config)
 
     timestamps {
         stakaterNode(config) {

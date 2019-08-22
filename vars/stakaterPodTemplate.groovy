@@ -124,9 +124,13 @@ def getStakaterPodVolumes(Map parameters = [:]) {
         volumes.add(hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock'))
     }
 
+    if (isContainerDConfig) {
+        volumes.add(hostPathVolume(hostPath: '/var/lib/containers/', mountPath: '/var/lib/containers/'))
+    }
+
     if (isContainerDMount) {
         volumes.add(hostPathVolume(hostPath: '/var/run/containerd/containerd.sock', mountPath: '/var/run/containerd/containerd.sock'))
-        volumes.add(hostPathVolume(hostPath: '/var/lib/containers/', mountPath: '/var/lib/containers/'))
+       
     }
 
     if (isGitSsh) {
