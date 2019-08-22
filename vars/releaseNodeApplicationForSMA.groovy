@@ -111,9 +111,9 @@ def call(body) {
                         }
                         String commentMessage = "Yikes! You better fix it before anyone else finds out! [Build ${env.BUILD_NUMBER}](${env.BUILD_URL}) has Failed!"
                         if(cloneUsingToken) {
-                            git.addCommentToPullRequest(commentMessage, tokenSecret)
+                            git.addCommentToPullRequest(commentMessage, tokenSecret, gitUser)
                         } else {
-                            git.addCommentToPullRequest(commentMessage)
+                            git.addCommentToPullRequest(commentMessage, gitUser)
                         }
                         throw e
                     }
@@ -124,9 +124,9 @@ def call(body) {
 
                         String commentMessage = "Image is available for testing. `docker pull ${dockerImage}:${version}`"
                         if(cloneUsingToken) {
-                            git.addCommentToPullRequest(commentMessage, tokenSecret)
+                            git.addCommentToPullRequest(commentMessage, tokenSecret, gitUser)
                         } else {
-                            git.addCommentToPullRequest(commentMessage)
+                            git.addCommentToPullRequest(commentMessage, gitUser)
                         }
                     }
                 }
