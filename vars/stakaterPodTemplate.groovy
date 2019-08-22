@@ -100,6 +100,7 @@ def getStakaterPodVolumes(Map parameters = [:]) {
     Boolean isStkConfig = parameters.get('isStkConfig', false)
     Boolean isHelmPgpKey = parameters.get('isHelmPgpKey', false)
     Boolean isContainerDMount = parameters.get('isContainerDMount', false)
+    Boolean isContainerDConfig = parameters.get('isContainerDConfig', false)
     def additionalSecretVolumes = parameters.get('additionalSecretVolumes', [])
     def additionalHostPathVolumes = parameters.get('additionalHostPathVolumes', [])
     def additionalPVCs = parameters.get('additionalPVCs', [])
