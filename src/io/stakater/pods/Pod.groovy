@@ -44,7 +44,7 @@ def enableChartMuseum(Map parameters = [:]) {
 def setDefaultContainerEnvVarsConfig(Map parameters) {
     setDefaultContainer(parameters)
 
-    if ( ! parameters.podContainers.defaultContainer.grep('envVarsConfig', false) ) {
+    if ( ! parameters.podContainers.defaultContainer.grep('envVarsConfig') ) {
         parameters.podContainers.defaultContainer.envVarsConfig = [:]
     }
 }
