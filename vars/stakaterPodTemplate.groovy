@@ -95,6 +95,7 @@ def getStakaterPodVolumes(Map parameters = [:]) {
     Boolean isGradleLocalRepo = parameters.get('isGradleLocalRepo', false)
     Boolean isDockerConfig = parameters.get('isDockerConfig', false)
     Boolean isDockerMount = parameters.get('isDockerMount', false)
+    Boolean isContainerDMount = parameters.get('isContainerDMount', false)
     Boolean isGitSsh = parameters.get('isGitSsh', false)
     Boolean isHubApiToken = parameters.get('isHubApiToken', false)
     Boolean isStkConfig = parameters.get('isStkConfig', false)
@@ -121,6 +122,11 @@ def getStakaterPodVolumes(Map parameters = [:]) {
 
     if (isDockerMount) {
         volumes.add(hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock'))
+    }
+
+    if (isContainerDMount) {
+        volumes.add(hostPathVolume(hostPath: '/var/lib/containers/', mountPath: '/var/lib/containers/'))
+        volumes.add(hostPathVolume(hostPath: '/var/run/containerd/containerd.sock', mountPath: '/var/run/containerd/containerd.sock'))
     }
 
     if (isGitSsh) {

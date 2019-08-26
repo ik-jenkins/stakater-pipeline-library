@@ -76,6 +76,7 @@ Volumes can be mounted on pod using the following parameters:
 | isGradleLocalRepo          | `false`       | Adds a persistent volume claim with name `jenkins-gradle-local-repo` and mount path `/home/gradle/`.|
 | isDockerConfig            | `false`       | Adds a secret volume with name `jenkins-docker-cfg` and mount path `/home/jenkins/.docker`. |
 | isDockerMount             | `false`       | Adds a host path volume with host path `/var/run/docker.sock` and mount path `/var/run/docker.sock`. |
+| isContainerDMount         | `false`       | Adds a host path volume with host path `/var/lib/containers/` and mount path `/var/lib/containers/` additionally mounts host path `/var/run/containerd/containerd.sock` and mount path `/var/run/containerd/containerd.sock`. |
 | isGitSsh                  | `false`       | Adds a secret volume with name `jenkins-git-ssh` and mount path `/root/.ssh-git`. |
 | isHubApiToken             | `false`       | Adds a secret volume with name `jenkins-hub-api-token` and mount path `/home/jenkins/.apitoken`. |
 | isStkConfig               | `false`       | Adds a secret volume with name `stk-config` and mount path `/home/jenkins/.stk`. |
