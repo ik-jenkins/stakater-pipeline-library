@@ -44,7 +44,9 @@ String replaceCredentialsInHttpURL(String URL, String username, String password)
 
 def isDockerSocketExists()
 {
-    if (env['DOCKER_SOCKET'] != '') {
+    def dockerSocket = env['DOCKER_SOCKET']
+    echo "Value for DOCKER_SOCKET environment variable: ${dockerSocket}"
+    if (env['DOCKER_SOCKET'] != '') { 
       return true
     }
     else {

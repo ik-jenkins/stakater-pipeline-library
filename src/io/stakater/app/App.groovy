@@ -11,9 +11,11 @@ Map configure(Map parameters = [:]) {
     def common = new io.stakater.Common()
     
     if (common.isDockerSocketExists()) {
+        print "Using Docker"
         stakaterPod.setDockerConfig(parameters)
     }
     else {
+        print "Using Containerd"
         stakaterPod.setContainerDConfig(parameters)
     }
     stakaterPod.addExtraContainer(parameters, container)
