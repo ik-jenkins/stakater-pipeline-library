@@ -42,8 +42,7 @@ String replaceCredentialsInHttpURL(String URL, String username, String password)
     return protocol + username + ":" + password + "@" + strippedURL
 }
 
-def isDockerSocketExists()
-{
+def isDockerSocketExists() {
     def dockerSocket = env['DOCKER_SOCKET']
     echo "Value for DOCKER_SOCKET environment variable: ${dockerSocket}"
     if (env['DOCKER_SOCKET']) { 
