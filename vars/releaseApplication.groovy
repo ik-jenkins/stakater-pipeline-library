@@ -22,11 +22,10 @@ def call(body) {
                 Map baseConfig = appConfig.getBaseConfig(config, repoName, repoOwner, WORKSPACE)
 
                 def containerManager = null
-                if (config.isDockerMount){
+                if (config.podVolumes.isDockerMount){
                     containerManager = new io.stakater.containers.Docker()
                 }
-                
-                if (config.isContainerDmount){
+                else {
                     containerManager = new io.stakater.containers.Podman()
                 }
 
