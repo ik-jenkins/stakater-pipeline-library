@@ -38,7 +38,7 @@ String replaceCredentialsInHttpURL(String URL, String username, String password)
 
     //Convert bitbucket.org:owner/repo to bitbucket.org/owner/repo
     strippedURL = strippedURL.replaceAll(':', '/')
-
+    echo "before exiting HTTPUrl"
     return protocol + username + ":" + password + "@" + strippedURL
 }
 

@@ -212,7 +212,9 @@ def runGoReleaser(String repoDir){
 
 def configureRepoWithCredentials(String repoURL, String username, String password) {
     def common = new io.stakater.Common()
+    echo "before calling HTTPUrl"
     String newURL = common.replaceCredentialsInHttpURL(repoURL, username, password)
+    echo "before git remote command"
     sh """
         git remote set-url origin $newURL
     """
