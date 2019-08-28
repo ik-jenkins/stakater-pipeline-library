@@ -21,7 +21,7 @@ def call(body) {
                 Map notificationConfig = appConfig.getNotificationConfig(config)
                 Map baseConfig = appConfig.getBaseConfig(config, repoName, repoOwner, WORKSPACE)
 
-                def docker = new io.stakater.containers.Docker()
+                def podman = new io.stakater.containers.Podman()
                 def stakaterCommands = new io.stakater.StakaterCommands()
                 def git = new io.stakater.vc.Git()
                 def utils = new io.fabric8.Utils()
@@ -67,8 +67,8 @@ def call(body) {
                         }
 
                         stage('Image build & push') {
-                            docker.buildImageWithTagCustom(dockerImage, version)
-                            docker.pushTagCustom(dockerImage, version)
+                            podman.buildImageWithTagCustom(dockerImage, version)
+                            podman.pushTagCustom(dockerImage, version)
                         }
 
                         stage('Package chart' ) {

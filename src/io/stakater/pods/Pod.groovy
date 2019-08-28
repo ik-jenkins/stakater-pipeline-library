@@ -6,18 +6,19 @@ def setToolsImage(Map parameters = [:], String image) {
     parameters.podContainers.defaultContainer.image = image
 }
 
-def mountDockerSocket(Map parameters = [:]) {
-    setPodVolumes(parameters)
-    parameters.podVolumes.isDockerMount = true
-}
+// def mountDockerSocket(Map parameters = [:]) {
+//     setPodVolumes(parameters)
+//     parameters.podVolumes.isDockerMount = true
+// }
 
-def mountContainerDSocket(Map parameters = [:]) {
-    setPodVolumes(parameters)
-    parameters.podVolumes.isContainerDMount = true
-}
+// def mountContainerDSocket(Map parameters = [:]) {
+//     setPodVolumes(parameters)
+//     parameters.podVolumes.isContainerDMount = true
+// }
 
 Map setDockerConfig(Map parameters = [:]) {
-    mountDockerSocket(parameters)
+ //  mountDockerSocket(parameters)
+    setPodVolumes(parameters)
     setDefaultContainerEnvVarsConfig(parameters)
 
     parameters.podVolumes.isDockerConfig = true
@@ -25,14 +26,14 @@ Map setDockerConfig(Map parameters = [:]) {
     return parameters
 }
 
-Map setContainerDConfig(Map parameters = [:]) {
-    mountContainerDSocket(parameters)
-    setDefaultContainerEnvVarsConfig(parameters)
+// Map setContainerDConfig(Map parameters = [:]) {
+//     mountContainerDSocket(parameters)
+//     setDefaultContainerEnvVarsConfig(parameters)
 
-    parameters.podVolumes.isContainerDConfig = true
-    parameters.podContainers.defaultContainer.envVarsConfig.isContainerD = true
-    return parameters
-}
+//     parameters.podVolumes.isContainerDConfig = true
+//     parameters.podContainers.defaultContainer.envVarsConfig.isContainerD = true
+//     return parameters
+// }
 
 
 def enableMavenSettings(Map parameters = [:]) {

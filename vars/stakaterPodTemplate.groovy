@@ -121,18 +121,18 @@ def getStakaterPodVolumes(Map parameters = [:]) {
         volumes.add(secretVolume(secretName: 'jenkins-docker-cfg', mountPath: '/home/jenkins/.docker'))
     }
 
-    if (isDockerMount) {
-        volumes.add(hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock'))
-    }
+    // if (isDockerMount) {
+    //     volumes.add(hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock'))
+    // }
 
-    if (isContainerDConfig) {
-        volumes.add(hostPathVolume(hostPath: '/var/lib/containers/', mountPath: '/var/lib/containers/'))
-        volumes.add(secretVolume(secretName: 'jenkins-docker-cfg', mountPath: '/home/jenkins/.docker'))
-    }
+    // if (isContainerDConfig) {
+    //     volumes.add(hostPathVolume(hostPath: '/var/lib/containers/', mountPath: '/var/lib/containers/'))
+    //     volumes.add(secretVolume(secretName: 'jenkins-docker-cfg', mountPath: '/home/jenkins/.docker'))
+    // }
 
-    if (isContainerDMount) {
-        volumes.add(hostPathVolume(hostPath: '/var/run/containerd/containerd.sock', mountPath: '/var/run/containerd/containerd.sock'))
-    }
+    // if (isContainerDMount) {
+    //     volumes.add(hostPathVolume(hostPath: '/var/run/containerd/containerd.sock', mountPath: '/var/run/containerd/containerd.sock'))
+    // }
 
     if (isGitSsh) {
         volumes.add(secretVolume(secretName: 'jenkins-git-ssh', mountPath: '/root/.ssh-git'))
