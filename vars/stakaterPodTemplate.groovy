@@ -94,13 +94,14 @@ def getStakaterPodVolumes(Map parameters = [:]) {
     Boolean isMavenLocalRepo = parameters.get('isMavenLocalRepo', false)
     Boolean isGradleLocalRepo = parameters.get('isGradleLocalRepo', false)
     Boolean isDockerConfig = parameters.get('isDockerConfig', false)
-    Boolean isDockerMount = parameters.get('isDockerMount', false)
+//    Boolean isDockerMount = parameters.get('isDockerMount', false)
     Boolean isGitSsh = parameters.get('isGitSsh', false)
     Boolean isHubApiToken = parameters.get('isHubApiToken', false)
     Boolean isStkConfig = parameters.get('isStkConfig', false)
     Boolean isHelmPgpKey = parameters.get('isHelmPgpKey', false)
-    Boolean isContainerDMount = parameters.get('isContainerDMount', false)
-    Boolean isContainerDConfig = parameters.get('isContainerDConfig', false)
+    Boolean isMountContainerDir = parameters.get('isMountContainerDir', false)
+//    Boolean isContainerDMount = parameters.get('isContainerDMount', false)
+//    Boolean isContainerDConfig = parameters.get('isContainerDConfig', false)
     def additionalSecretVolumes = parameters.get('additionalSecretVolumes', [])
     def additionalHostPathVolumes = parameters.get('additionalHostPathVolumes', [])
     def additionalPVCs = parameters.get('additionalPVCs', [])
@@ -120,7 +121,10 @@ def getStakaterPodVolumes(Map parameters = [:]) {
     if (isDockerConfig) {
         volumes.add(secretVolume(secretName: 'jenkins-docker-cfg', mountPath: '/home/jenkins/.docker'))
     }
-
+    
+    if (isMountContainerDir) {
+        volumes.add(hostPathVolume(hostPath: '/var/lib/containers/', mountPath: '/var/lib/containers/'))
+    }
     // if (isDockerMount) {
     //     volumes.add(hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock'))
     // }
