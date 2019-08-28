@@ -46,7 +46,7 @@ def isDockerSocketExists()
 {
     def dockerSocket = env['DOCKER_SOCKET']
     echo "Value for DOCKER_SOCKET environment variable: ${dockerSocket}"
-    if (env['DOCKER_SOCKET'] != '') { 
+    if (env['DOCKER_SOCKET']) { 
       return true
     }
     else {
