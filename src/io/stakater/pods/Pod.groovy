@@ -36,7 +36,7 @@ Map setDockerConfig(Map parameters = [:]) {
 //     return parameters
 // }
 def mountContainerDirectory(Map parameters = [:]) {
-    parameters.podContainers.defaultContainer.envVarsConfig.isMountContainerDir = true
+    parameters.podVolumes.isMountContainerDir = true
 }
 
 def enableMavenSettings(Map parameters = [:]) {
