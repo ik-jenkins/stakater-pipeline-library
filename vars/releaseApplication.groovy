@@ -21,13 +21,13 @@ def call(body) {
                 Map notificationConfig = appConfig.getNotificationConfig(config)
                 Map baseConfig = appConfig.getBaseConfig(config, repoName, repoOwner, WORKSPACE)
 
-                def containerDaemon = null
+                def containerManager = null
                 if (config.isDockerMount){
-                    containerDaemon = new io.stakater.containers.Docker()
+                    containerManager = new io.stakater.containers.Docker()
                 }
-
+                
                 if (config.isContainerDmount){
-                    containerDaemon = new io.stakater.containers.Podman()
+                    containerManager = new io.stakater.containers.Podman()
                 }
 
                 def stakaterCommands = new io.stakater.StakaterCommands()
@@ -75,8 +75,8 @@ def call(body) {
                         }
 
                         stage('Image build & push') {
-                            containerDaemon.buildImageWithTagCustom(dockerImage, version)
-                            containerDaemon.pushTagCustom(dockerImage, version)
+                            containerManager.buildImageWithTagCustom(dockerImage, version)
+                            containerManager.pushTagCustom(dockerImage, version)
                         }
 
                         stage('Package chart' ) {

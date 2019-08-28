@@ -42,4 +42,14 @@ String replaceCredentialsInHttpURL(String URL, String username, String password)
     return protocol + username + ":" + password + "@" + strippedURL
 }
 
+def isDockerSocketExists()
+{
+    if (env['DOCKER_SOCKET'] != '') {
+      return true
+    }
+    else {
+      return false
+    }
+}
+
 return this

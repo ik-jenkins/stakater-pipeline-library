@@ -95,11 +95,11 @@ def getStakaterPodVolumes(Map parameters = [:]) {
     Boolean isGradleLocalRepo = parameters.get('isGradleLocalRepo', false)
     Boolean isDockerConfig = parameters.get('isDockerConfig', false)
     Boolean isDockerMount = parameters.get('isDockerMount', false)
-    Boolean isContainerDMount = parameters.get('isContainerDMount', false)
     Boolean isGitSsh = parameters.get('isGitSsh', false)
     Boolean isHubApiToken = parameters.get('isHubApiToken', false)
     Boolean isStkConfig = parameters.get('isStkConfig', false)
     Boolean isHelmPgpKey = parameters.get('isHelmPgpKey', false)
+    Boolean isContainerDConfig = parameters.get('isContainerDConfig', false)
     def additionalSecretVolumes = parameters.get('additionalSecretVolumes', [])
     def additionalHostPathVolumes = parameters.get('additionalHostPathVolumes', [])
     def additionalPVCs = parameters.get('additionalPVCs', [])
@@ -121,12 +121,11 @@ def getStakaterPodVolumes(Map parameters = [:]) {
     }
 
     if (isDockerMount) {
-        volumes.add(hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock'))
+        volumes.add(hostPathVolume(hostPath: env['DOCKER_SOCKET'], mountPath: env['DOCKER_SOCKET']))
     }
 
-    if (isContainerDMount) {
+    if (isContainerDConfig) {
         volumes.add(hostPathVolume(hostPath: '/var/lib/containers/', mountPath: '/var/lib/containers/'))
-        volumes.add(hostPathVolume(hostPath: '/var/run/containerd/containerd.sock', mountPath: '/var/run/containerd/containerd.sock'))
     }
 
     if (isGitSsh) {
@@ -189,7 +188,7 @@ def getStakaterPodContainers(Map parameters = [:]) {
 
 def getStakaterPodDefaultContainer(Map parameters = [:]) {
     String name = parameters.get('name', 'tools')
-    String image = parameters.get('image', 'stakater/pipeline-tools:v2.0.5')
+    String image = parameters.get('image', 'stakater/pipeline-tools:v2.0.9')
     String command = parameters.get('command', '/bin/sh -c')
     String args = parameters.get('args', 'cat')
     Boolean privileged = parameters.get('privileged', true)

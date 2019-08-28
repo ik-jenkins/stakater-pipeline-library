@@ -8,12 +8,12 @@ Map configure(Map parameters = [:]) {
 
     Map container = createBuilderContainer(parameters.builderImage)
     def stakaterPod = new io.stakater.pods.Pod()
+    def common = new io.stakater.Common()
     
-    if (parameters.isDockerMount) {
+    if (common.isDockerSocketExists()) {
         stakaterPod.setDockerConfig(parameters)
     }
-    
-    if (parameters.isContainerDMount) {
+    else {
         stakaterPod.setContainerDConfig(parameters)
     }
     stakaterPod.addExtraContainer(parameters, container)
