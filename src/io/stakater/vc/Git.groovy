@@ -214,6 +214,9 @@ def configureRepoWithCredentials(String repoURL, String username, String passwor
     def common = new io.stakater.Common()
     echo "before calling HTTPUrl"
     String newURL = common.replaceCredentialsInHttpURL(repoURL, username, password)
+    sh """
+       echo Testing sh
+    """
     echo "before git remote command"
     sh """
         git remote set-url origin $newURL
