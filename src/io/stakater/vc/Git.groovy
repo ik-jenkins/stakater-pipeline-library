@@ -218,6 +218,7 @@ def configureRepoWithCredentials(String repoURL, String username, String passwor
     sh """
         git remote set-url origin $newURL
     """
+    echo "After git remote command"
 }
 
 def ignoredFilesChanged(List<String> ignoreFiles) {
