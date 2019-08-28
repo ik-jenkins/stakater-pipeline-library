@@ -21,6 +21,7 @@ Map setDockerConfig(Map parameters = [:]) {
 }
 
 Map setContainerDConfig(Map parameters = [:]) {
+    setPodVolumes(parameters)
     setDefaultContainerEnvVarsConfig(parameters)
 
     parameters.podVolumes.isDockerConfig = true
