@@ -21,7 +21,6 @@ def call(body) {
                 Map notificationConfig = appConfig.getNotificationConfig(config)
                 Map baseConfig = appConfig.getBaseConfig(config, repoName, repoOwner, WORKSPACE)
 
-                echo "before init containerM"
                 def containerManager = null
                 if (config.podVolumes.isDockerMount){
                     containerManager = new io.stakater.containers.Docker()
@@ -35,7 +34,6 @@ def call(body) {
                 def utils = new io.fabric8.Utils()
                 def chartManager = new io.stakater.charts.ChartManager()
                 def notificationManager = new io.stakater.notifications.NotificationManager()
-                echo "before cloning"
                 if (gitConfig.cloneUsingToken) {
                     git.configureRepoWithCredentials(repoUrl, gitConfig.user, gitConfig.tokenSecret)
                 }
@@ -43,7 +41,6 @@ def call(body) {
                 String dockerImage = ""
                 String version = ""
                 def buildException = null
-                echo "before build container"
                 container(name: 'builder') {
                     try {
                         echo "Image NAME: ${baseConfig.imageName}"
