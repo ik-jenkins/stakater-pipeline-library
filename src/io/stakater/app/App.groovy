@@ -88,6 +88,14 @@ def parseGoalEnvironment(String goal){
     else {
         parsedGoal = parsedGoal.replaceAll('#ENVIRONMENT','stage')
     }
+    // Temporary code to use prod-replica environment
+    if (branch == 'master'){
+        parsedGoal = parsedGoal.replaceAll('#TEMPENVIRONMENT','prod-replica')
+    }
+    else {
+        parsedGoal = parsedGoal.replaceAll('#TEMPENVIRONMENT','stage')
+    }
+
     echo "Parsed goal from ${goal} to ${parsedGoal}"
     return parsedGoal
 }
